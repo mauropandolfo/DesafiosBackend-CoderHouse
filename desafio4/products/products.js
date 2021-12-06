@@ -23,7 +23,7 @@ class Products{
     }
     find(id){
         let element = this.list.find(obj => obj.id == id)
-        return element != undefined ? element : `not found`
+        return element != undefined ? element : null
     }
     insert(obj){
         try{
@@ -51,9 +51,10 @@ class Products{
             const index = this.list.findIndex((obj) => obj.id == id)
             if(index != -1){
                 this.list.splice(index, 1)
-                this.insert()
+                this.insert(id)
                 return `se borro el item con id ${id}`
             }
+            else return null
         }
         catch(err){
             console.log(`Ocurrio un error al borrar el elemento con id ${id}, ${err}`)
