@@ -51,7 +51,6 @@ class Products{
             const index = this.list.findIndex((obj) => obj.id == id)
             if(index != -1){
                 this.list.splice(index, 1)
-                this.insert(id)
                 return `se borro el item con id ${id}`
             }
             else return null
