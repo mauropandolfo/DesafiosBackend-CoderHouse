@@ -11,10 +11,10 @@ app.use(express.urlencoded({
 app.set('views', './views')
 app.set('view engine', 'ejs')
 app.get('/', (req, res) => {
-    return res.render('form')
+    return res.render('ejs/form')
 })
 app.get('/list', (req, res) =>{
-    return res.render('list',{
+    return res.render('ejs/list',{
         list: products.list
     })
 })
@@ -25,29 +25,3 @@ router.post('/',(req, res) =>{
 })
 app.use('/api/productos', router)
 app.listen(8080)
-
-// router.get('/:id', (req, res) =>{
-//     const id = req.params.id
-//     const obj = products.find(id)
-//     if(obj != null){
-//         return res.json(obj)
-//     }
-//     else return res.json(`no se encontro el elemento ${id}`)
-// })
-// router.put('/:id', (req, res) =>{
-//     const obj = req.body
-//     const id = req.params.id
-//     if(obj != undefined && id != undefined){
-//         return res.json(products.update(id, obj))
-//     }
-//     else return `ocurrio un error al actualizar ${obj}`
-// })
-// router.delete('/:id', (req, res) =>{
-//     const id = req.params.id
-//     const del = products.deleteById(id)
-//     if( del != null ){
-//         del
-//         res.json(`se borro el bojeto ${id}`)
-//     }
-//     else res.json({error: 'objeto no encontrado'})
-// })
