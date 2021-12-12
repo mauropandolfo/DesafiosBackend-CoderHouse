@@ -1,0 +1,28 @@
+html 
+    head 
+        title='formulario con pug'
+    body 
+        form(
+            action='/api/productos'
+            method='post'
+        )
+            input(
+                type='text'
+                name='nombre'
+            )
+            br
+            input(
+                type='text'
+                name='precio'
+            )
+            br
+            input(
+                type='text'
+                name='nombre'
+            )
+            br
+            button(
+                type='submit'
+            ) Agregar!!
+            a(href="/list")
+                button Mostrar todos

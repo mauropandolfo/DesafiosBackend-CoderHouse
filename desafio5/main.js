@@ -8,13 +8,16 @@ app.use(express.json())
 app.use(express.urlencoded({
     extended : true
 }))
+
+
 app.set('views', './views')
-app.set('view engine', 'ejs')
+app.set('view engine', 'pug')
+
 app.get('/', (req, res) => {
-    return res.render('ejs/form')
+    return res.render('pug/form')
 })
 app.get('/list', (req, res) =>{
-    return res.render('ejs/list',{
+    return res.render('pug/list',{
         list: products.list
     })
 })
