@@ -31,19 +31,20 @@ router.post('/',(req, res) =>{
 router.put('/:id', (req, res) =>{
     const obj = req.body
     const id = req.params.id
-    if(obj != undefined && id != undefined){
+    const upd = products.update(id, obj)
+    if(upd != null){
         return res.json(products.update(id, obj))
     }
-    else return `ocurrio un error al actualizar ${obj}`
+    else return res.json({error:'el objeto no existe'})
 })
 router.delete('/:id', (req, res) =>{
     const id = req.params.id
     const del = products.deleteById(id)
     if( del != null ){
         del
-        res.json(`se borro el bojeto ${id}`)
+        return res.json(`se borro el bojeto ${id}`)
     }
-    else res.json({error: 'objeto no encontrado'})
+    else return res.json({error: 'objeto no encontrado'})
 })
 
 app.use('/api/productos', router)

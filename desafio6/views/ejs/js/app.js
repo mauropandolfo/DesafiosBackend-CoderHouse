@@ -1,5 +1,13 @@
-const socket = io()
+let products = []
+const URLJson = 'http://localhost:8080/api/productos'
 
-io.on('connection', (socket) => {
-    console.log('conected')
-})
+fetch(URLJson)
+    .then(response => response.json())
+    .then(data =>{
+        try{
+            console.log(data)
+        }
+        catch(err){
+            console.log(err)
+        }
+    })

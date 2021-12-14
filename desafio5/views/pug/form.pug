@@ -6,23 +6,26 @@ html
             action='/api/productos'
             method='post'
         )
+            p nombre 
             input(
                 type='text'
                 name='nombre'
             )
             br
+            p precio
             input(
                 type='text'
                 name='precio'
-            )
+            ) 
             br
+            p thumbnail 
             input(
                 type='text'
-                name='nombre'
-            )
+                name='thumbnail'
+            ) 
             br
             button(
                 type='submit'
-            ) Agregar!!
-            a(href="/list")
+            ) Agregar!!         
+        a(href="/list")
                 button Mostrar todos

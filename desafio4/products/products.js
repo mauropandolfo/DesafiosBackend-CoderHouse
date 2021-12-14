@@ -38,9 +38,12 @@ class Products{
     update(id, obj){
         try{
             const index = this.list.findIndex((objT) => objT.id == id)
-            obj.id = this.list[index].id
-            this.list[index] = obj
-            return obj
+            if(index != -1){
+                obj.id = this.list[index].id
+                this.list[index] = obj
+                return obj
+            }
+            else return null
         }
         catch(err){
             console.log(`hubo un error al actualizar el archivo ${err}`)
