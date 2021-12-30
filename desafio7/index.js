@@ -3,8 +3,6 @@ const { Router } = require('express')
 const router = Router()
 const { Server: HttpServer } = require('http')
 const { Server: IOServer } = require('socket.io')
-const Container = require('./methods.js')
-const file = new Container('./data/products.json')
 
 const app = express()
 const httpServer = new HttpServer(app)
@@ -13,7 +11,10 @@ const io = new IOServer(httpServer)
 const messages = []
 
 
-file.init()
+//base de datos
+const DBContainer = require('./dbMethods.js')
+const request = new DBContainer()
+
 app.use(express.static('./public'))
 
 app.get('/',(req,res) => {
@@ -21,14 +22,14 @@ app.get('/',(req,res) => {
 })
 
 router.get('/',(req,res) =>{
-    const elements = file.getAll()
-    res.send(JSON.stringify(elements))
+    const dbData = request.getFromDB()
+    res.send(JSON.stringify(dbData))
 })
 
 io.on('connection', (socket) =>{
     console.log('usuario conectado')
     socket.on('new_product',async (data)=>{
-        await file.save(data)
+        await request.save(data)
         io.sockets.emit('products', data)
     })
 })
