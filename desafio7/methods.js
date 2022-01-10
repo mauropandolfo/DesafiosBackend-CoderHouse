@@ -12,11 +12,17 @@ class Container{
             table.string('thumbnail', 30)
             table.float('precio')
         })
+        .finally(() => {
+            this.knex.destroy()
+        })
     }
 
     async save(object){
         try{
             return await this.knex(this.table).insert([object])
+            .finally(() => {
+                this.knex.destroy()
+            })
         }
         catch(err){
             return `Ocurrio un error al guardar el datos en la DB ${err}`
@@ -26,6 +32,9 @@ class Container{
     async getById(id){
         try{
             return await this.knex.from(this.table).select("*").where('id', id).limit(1)
+            .finally(() => {
+                this.knex.destroy()
+            })
         }
         catch(err){
             return `Hubo un error al buscar el elemento en la DB ${err}`
@@ -35,6 +44,9 @@ class Container{
     async getAll(){
         try{
             return await this.knex.from(this.table).select("*")
+            .finally(() => {
+                this.knex.destroy()
+            })
         }
         catch(err){
             return `Hubo un error al buscar el elemento en la DB ${err}`
@@ -43,6 +55,9 @@ class Container{
     async deleteById(id){
         try{
             return await this.knex(this.table).where('id', id).del()
+            .finally(() => {
+                this.knex.destroy()
+            })
         }
         catch(err){
             return `Hubo un error al borrar el elemento en la DB${err}`
